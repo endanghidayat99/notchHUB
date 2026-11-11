@@ -3,6 +3,8 @@
 A clean-room macOS notch hub (Dynamic-Island style) inspired by the public feature list of Notchy. Native Swift/SwiftUI, macOS 13+.
 No code from Notchy was decompiled or copied. See **FEATURES.md** for the parity matrix.
 
+📖 **Dokumentasi lengkap (Bahasa Indonesia): [docs/DOKUMENTASI.md](docs/DOKUMENTASI.md)**
+
 ## Build
 ```bash
 cd ~/Workspace/NotchHub
