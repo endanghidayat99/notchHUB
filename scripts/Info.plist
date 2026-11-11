@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key><string>NotchHub</string>
+    <key>CFBundleDisplayName</key><string>NotchHub</string>
+    <key>CFBundleIdentifier</key><string>dev.notchhub.app</string>
+    <key>CFBundleExecutable</key><string>NotchHub</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.0.0</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>LSMinimumSystemVersion</key><string>13.0</string>
+    <key>LSUIElement</key><true/>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>CFBundleDevelopmentRegion</key><string>en</string>
+    <key>CFBundleLocalizations</key><array><string>en</string><string>id</string></array>
+    <key>NSAppleEventsUsageDescription</key><string>NotchHub controls Spotify, Music, browsers (playback speed) and Messages (inline reply).</string>
+    <key>NSCalendarsUsageDescription</key><string>Shows today's events and meeting countdowns in the notch.</string>
+    <key>NSCalendarsFullAccessUsageDescription</key><string>Shows today's events and lets you add events in one line.</string>
+    <key>NSRemindersUsageDescription</key><string>Captures Apple Reminders from the notch.</string>
+    <key>NSRemindersFullAccessUsageDescription</key><string>Captures and completes Apple Reminders from the notch.</string>
+    <key>NSLocationWhenInUseUsageDescription</key><string>Used for local weather, sunrise and sunset.</string>
+    <key>NSLocationUsageDescription</key><string>Used for local weather, sunrise and sunset.</string>
+    <key>NSCameraUsageDescription</key><string>Camera Mirror previews your webcam before calls.</string>
+    <key>NSMicrophoneUsageDescription</key><string>Knock to Control detects taps on your Mac through the microphone. Audio is analysed on-device and never recorded.</string>
+    <key>NSBluetoothAlwaysUsageDescription</key><string>Shows AirPods and accessory batteries and connects devices.</string>
+    <key>NSScreenCaptureUsageDescription</key><string>Used for the live audio spectrum and Window Watch.</string>
+</dict>
+</plist>
