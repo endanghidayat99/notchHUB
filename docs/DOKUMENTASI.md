@@ -1,6 +1,6 @@
 # NotchHub — Dokumentasi Fitur
 
-Per 11 November 2026. Versi online: https://claude.ai/artifact/X7McbfkvHX2W8vVT8ctiLK
+Per 12 November 2026. Versi online: https://claude.ai/artifact/X7McbfkvHX2W8vVT8ctiLK
 
 ## Daftar isi
 
@@ -36,13 +36,12 @@ Build memakai Command Line Tools. Karena SDK baru menjadikan `@State` macro yang
 | Izin | Dipakai untuk |
 | --- | --- |
 | Accessibility | auto-paste, sembunyikan HUD bawaan, Hyper key, window snapping, keystroke HUD, cleaning lock, message/call island |
-| Screen & System Audio Recording | spektrum audio, Window Watch |
+| Screen & System Audio Recording | spektrum audio |
 | Full Disk Access | Notification Mirror, deteksi Focus |
 | Automation | Spotify, Music, browser (kecepatan video), Messages, Preview |
-| Kalender & Pengingat | tab Kalender, Reminders |
 | Lokasi | cuaca, matahari terbit/terbenam, waktu sholat otomatis |
-| Kamera / Mikrofon | Camera Mirror / Knock to Control |
-| Notifikasi | waktu sholat, alert harga saham, download |
+| Mikrofon | Knock to Control |
+| Notifikasi | waktu sholat, download |
 
 Karena ditandatangani ad-hoc, macOS bisa meminta izin ulang setiap kali di-build ulang.
 
@@ -57,7 +56,7 @@ Notch punya empat keadaan: **tertutup** (menyatu dengan notch fisik, menampilkan
 - Auto-collapse saat kursor keluar panel lebih dari 0,5 detik
 - Seret file ke notch untuk menaruhnya di Shelf; goyang file saat menyeret untuk membuka Shelf
 
-**Live activity di notch tertutup** (bisa beberapa sekaligus, pill melebar): lagu yang diputar, countdown waktu sholat, timer/Pomodoro, Keep Awake, rapat berikutnya, download, Claude Code/Codex sedang bekerja, perintah shell lama, build Xcode, indikator kamera/mikrofon.
+**Live activity di notch tertutup** (bisa beberapa sekaligus, pill melebar): lagu yang diputar, countdown waktu sholat, timer/Pomodoro, Keep Awake, download, Claude Code/Codex sedang bekerja, perintah shell lama, build Xcode, indikator kamera/mikrofon.
 
 **Tampilan & personalisasi**
 
@@ -69,7 +68,7 @@ Notch punya empat keadaan: **tertutup** (menyatu dengan notch fisik, menampilkan
 - **Bahasa**: mengikuti macOS, atau pilih English / Bahasa Indonesia
 - **Launch at login**
 
-**Tab** (ikon di kiri dan kanan notch): Beranda, Sholat, Media, Rak (Shelf), Papan Klip, Timer, Catatan, Kalender, Saham, Peluncur, Pintasan, Terminal, AI, Sistem, Alat, Notifikasi.
+**Tab** (ikon di kiri dan kanan notch): Beranda, Sholat, Media, Rak (Shelf), Papan Klip, Timer, AI, Sistem, Notifikasi.
 
 **Hotkey**
 
@@ -139,13 +138,7 @@ Tab Media mengontrol Spotify dan Apple Music lewat Apple Events, plus audio sist
 | Stopwatch | tab Timer › Stopwatch | akurat berdasarkan jam sistem (tidak melenceng), tampil di notch |
 | Pengingat istirahat | Settings › Productivity | island "Take a break" tiap N menit |
 | Keep Awake | tab Timer, Beranda, palette | cegah sleep tanpa batas, 30/60/120 menit, atau sampai jam tertentu |
-| Catatan cepat | tab Catatan | tulis, edit, salin, hapus; tersimpan lokal |
-| Apple Reminders | tab Catatan | tambah & centang pengingat, sinkron iCloud |
-| Kalender | tab Kalender | acara hari ini & besok dari iCloud/Google/Exchange; tambah acara satu baris ("Standup besok 9:00"); countdown rapat di notch 30 menit sebelumnya |
 | Cuaca | tab Beranda | suhu & kondisi dari Open-Meteo, berdasarkan lokasi |
-| Saham | tab Saham | watchlist (default AAPL, MSFT, NVDA, BBCA.JK), harga & grafik intraday, label Pre-market/After-hours/Closed, alert harga, ticker berputar di Beranda |
-| Teleprompter (Cuely) | tab Alat › Cuely | naskah berjalan tepat di bawah webcam, atur kecepatan, klik untuk jeda; tidak terlihat saat share screen |
-| Camera Mirror | tab Alat › Camera | cek tampilan webcam sebelum meeting |
 | Focus mode | otomatis | island saat Focus berubah; pemberitahuan prioritas rendah ditahan saat DND (perlu Full Disk Access) |
 
 ## Clipboard, pencarian & command palette
@@ -170,11 +163,11 @@ Semua yang Anda salin (teks, gambar, file) tersimpan di tab Papan Klip, maksimal
 | `12*7+3` | hasil hitungan, Enter = salin |
 | `timer 5` | mulai timer 5 menit |
 | `tr selamat pagi` | terjemahan langsung |
-| nama Shortcut / snippet | jalankan Shortcut / tempel snippet |
+| nama snippet | tempel snippet |
 | teks apa saja | cocok dari clipboard + file (Spotlight) + cari di Google, DuckDuckGo, Bing, Brave |
 | link `https://…` | simpan video (perlu `yt-dlp`) |
 
-**Tab Alat › Search** — pencarian di 9 mesin (Google, DuckDuckGo, Bing, Brave, Kagi, Perplexity, YouTube, GitHub, Wikipedia) plus mesin custom (URL dengan `%s`), terjemahan otomatis saat mengetik (bahasa tujuan default `id`), kalkulator cepat, dan simpan video dari link.
+**Pencarian lewat palette** — pencarian di 9 mesin (Google, DuckDuckGo, Bing, Brave, Kagi, Perplexity, YouTube, GitHub, Wikipedia) plus mesin custom (URL dengan `%s`), terjemahan otomatis saat mengetik (bahasa tujuan default `id`), kalkulator cepat, dan simpan video dari link.
 
 ## File shelf & konversi
 
@@ -206,7 +199,6 @@ Semua konversi berjalan offline. Hasilnya disimpan di samping file aslinya dan o
 | Capture area | Beranda › Capture atau palette | hasil ke clipboard dan Shelf |
 | Color eyedropper | Beranda › Color atau palette | klik piksel mana saja, kode hex tersalin; tanpa izin Screen Recording |
 | Ask about the screen | Beranda › Ask atau palette | seret area layar → teks dibaca on-device; tombol Copy, Search, Translate, buka link; Ask mengirim gambar ke Anthropic API |
-| Window Watch | tab Alat › Window Watch | pilih jendela; notifikasi saat isinya berubah (cek tiap 5 detik); hanya hash 32×32 yang disimpan, tidak ada gambar |
 | Keystroke HUD | Settings › System | tampilkan tombol yang ditekan (untuk presentasi/rekaman); field password otomatis dikecualikan |
 | Hidden from screen capture | Settings › Privacy | notch tidak ikut terekam/ter-share; "Hidden everywhere" juga menyembunyikan dari layar Anda sendiri, hotkey tetap jalan |
 
@@ -227,7 +219,7 @@ Sebagian besar diatur di Settings › System; tab Sistem menampilkan statistik d
 | Mute mikrofon | Beranda/palette; mute input untuk semua aplikasi | |
 | Knock to Control | ketukan 1/2/3 kali di bodi Mac: buka notch, Shelf, Clipboard, Caffeine, atau play/pause | dideteksi lewat mikrofon, sensitivitas bisa diatur |
 | Menu bar icon hiding | ikon ‹ dan pemisah │; ⌘-seret ikon ke kiri pemisah lalu klik ‹ untuk menyembunyikan | tanpa API privat |
-| Menu bar detach | Clipboard, Timer, AI Usage, Cuely jadi popover di menu bar | |
+| Menu bar detach | Clipboard, Timer, Agents (AI) jadi popover di menu bar | |
 | Statistik sistem | CPU, memori, jaringan naik/turun, grafik CPU | tab Sistem |
 | Brightness & backlight keyboard | slider di tab Sistem; tombol backlight ikut di-HUD | backlight hanya di keyboard yang mendukung |
 | Brightness monitor eksternal | slider di tab Sistem | lewat `m1ddc` (`brew install m1ddc`), Apple silicon, off default |
@@ -235,9 +227,7 @@ Sebagian besar diatur di Settings › System; tab Sistem menampilkan statistik d
 | Keyboard cleaning lock | semua tombol dikunci untuk dibersihkan; ⌘⎋ membuka | Clean screen juga menghitamkan semua layar (klik dua kali untuk keluar) |
 | Hyper key | Caps Lock = ⌃⌥⇧⌘; tekan sebentar = Escape | Caps Lock dipetakan ulang via `hidutil`, dikembalikan saat keluar |
 | Window snapping | seret jendela ke notch: kiri = setengah kiri, tengah = penuh, kanan = setengah kanan; ⌃⌥+gerak = pindah, ⌃⌥⇧+gerak = ubah ukuran | perlu Accessibility |
-| App launcher | tab Peluncur: aplikasi favorit, tambah lewat +, klik kanan untuk hapus | |
-| Apple Shortcuts | tab Pintasan: semua Shortcut sebagai tombol, ada filter | juga dari palette |
-| Widget desktop | tab Alat › Widgets: Clock, World Clock, Now Playing, Weather, Sunrise & Sunset, Calendar, Batteries, System, Photo, AI Usage, Timer | jendela di lapisan desktop, bisa digeser |
+| Widget desktop | Settings › Widgets: Clock, World Clock, Now Playing, Weather, Sunrise & Sunset, Batteries, System, Photo, Timer | jendela di lapisan desktop, bisa digeser |
 
 ## Komunikasi
 
@@ -253,13 +243,7 @@ macOS tidak menyediakan API untuk panggilan dan pesan masuk, jadi NotchHub memba
 
 Semua integrasi developer berjalan lewat **Developer API lokal** di `127.0.0.1:9999`, off default. Aktifkan di Settings › Developer; setiap request perlu header `Authorization: Bearer <token>` (token dibuat sekali per instalasi, disimpan di Keychain).
 
-**Tab AI**
-
-- **Claude Code**: token & perkiraan biaya untuk blok 5 jam berjalan (dengan waktu reset), hari ini, dan 7 hari; biaya turn terakhir. Data dari `~/.claude/projects`.
-- **Codex**: batas 5 jam & mingguan (persen terpakai), token & biaya hari ini dan 7 hari. Data dari `~/.codex/sessions`.
-- Alert di 80% dan 95% dari anggaran token yang Anda tetapkan, atau dari batas Codex.
-- Daftar aktivitas agen: prompt, turn selesai, permintaan izin, notifikasi.
-- Biaya adalah perkiraan dari harga publik per model; semua dibaca dari log lokal, tidak ada yang dikirim keluar.
+**Tab AI** menampilkan aktivitas agen saja: prompt, turn selesai (dengan perkiraan biaya turn Claude Code), permintaan izin, pertanyaan, dan notifikasi dari Claude Code dan Codex. Isinya datang dari hook di bawah; tanpa hook, tab ini kosong. Tombol Clear mengosongkan daftar.
 
 **Integrasi** (tombol di Settings › Developer menulis script ke `~/.notchhub/`)
 
@@ -272,8 +256,6 @@ Semua integrasi developer berjalan lewat **Developer API lokal** di `127.0.0.1:9
 | Aktivitas shell | `source ~/.notchhub/shell.zsh` di `~/.zshrc` | perintah >5 detik tampil di notch; island bila >10 detik dengan status sukses/gagal & durasi |
 | Build Xcode | jalankan `~/.notchhub/nh-xcodebuild` sebagai pengganti `xcodebuild` | timer build live + jumlah error/warning |
 | MCP | tombol **Copy MCP Configuration** | konfigurasi server MCP stdio (`notchhub_mcp.py`) untuk aplikasi AI: show_island, set_activity, start_timer, keep_awake, status |
-
-**Terminal di notch** — tab Terminal berisi login shell (zsh) penuh. Shell tetap berjalan saat Anda pindah tab.
 
 **Endpoint API**
 
@@ -296,6 +278,8 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -d '{"title":"Deploy selesai"}' h
 
 ## Privasi, keterbatasan & troubleshooting
 
+**Fitur yang sengaja dihapus (12 November 2026):** Catatan cepat & Apple Reminders, Kalender, Saham, App launcher, Apple Shortcuts, Terminal di notch, pelacak pemakaian AI (token, biaya, batas Claude Code & Codex), dan tab Alat (panel Search, teleprompter Cuely, Camera Mirror, Window Watch). Search, terjemahan, dan kalkulator tetap ada di command palette; pengaturan widget desktop pindah ke Settings › Widgets.
+
 **Privasi.** Tidak ada iklan, tracking, atau analytics. Data tetap di Mac, kecuali permintaan ke layanan berikut: lirik (LRCLIB), cuaca (Open-Meteo), saham (Yahoo Finance), terjemahan (Google), dan screenshot yang Anda kirim sendiri lewat tombol Ask (Anthropic API, memakai key Anda). Waktu sholat dihitung offline.
 
 **Fitur Notchy yang tidak tersedia atau berbeda**
@@ -311,7 +295,6 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -d '{"title":"Deploy selesai"}' h
 | Call & Message island | sebagian | membaca banner via Accessibility, bisa berubah antar versi macOS |
 | Widget desktop | berbeda | jendela desktop biasa, bukan WidgetKit |
 | Lirik per kata | perkiraan | LRCLIB hanya punya waktu per baris |
-| AI usage tracker | sebagian | Claude Code & Codex saja (tanpa Cursor, Copilot, dan 35+ provider lain) |
 | Build Xcode | sebagian | hanya build lewat `nh-xcodebuild`, bukan dari Xcode.app |
 | Update otomatis | berbeda | cek feed JSON + link unduh, bukan Sparkle |
 | Bahasa | sebagian | English & Bahasa Indonesia (bukan 134 bahasa) |

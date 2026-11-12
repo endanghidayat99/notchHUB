@@ -30,6 +30,8 @@ struct SettingsView: View {
             SystemSettings().tabItem { Label("System", systemImage: "cpu") }
             ProductivitySettings().tabItem { Label("Productivity", systemImage: "checklist") }
             PrayerSettings().tabItem { Label(L10n.lang == "id" ? "Sholat" : "Prayer", systemImage: "moon.stars") }
+            Form { Section("Desktop widgets") { DesktopWidgetSettings() } }.formStyle(.grouped)
+                .tabItem { Label("Widgets", systemImage: "square.grid.3x2") }
             PrivacySettings().tabItem { Label("Privacy", systemImage: "hand.raised") }
             DeveloperSettings().tabItem { Label("Developer", systemImage: "chevron.left.forwardslash.chevron.right") }
             AboutSettings().tabItem { Label("About", systemImage: "info.circle") }
@@ -184,7 +186,6 @@ struct SystemSettings: View {
     @AppStorage(Prefs.Key.detachClipboard) var dClip = false
     @AppStorage(Prefs.Key.detachTimer) var dTimer = false
     @AppStorage(Prefs.Key.detachAI) var dAI = false
-    @AppStorage(Prefs.Key.detachCuely) var dCuely = false
 
     var body: some View {
         Form {
@@ -224,8 +225,7 @@ struct SystemSettings: View {
                 Toggle("Menu bar icon hiding (⌘-drag icons left of the │ separator)", isOn: $mbHide)
                 Toggle("Detach Clipboard", isOn: $dClip)
                 Toggle("Detach Timer", isOn: $dTimer)
-                Toggle("Detach AI Usage", isOn: $dAI)
-                Toggle("Detach Cuely", isOn: $dCuely)
+                Toggle("Detach Agents (AI)", isOn: $dAI)
             }
             Button("Apply") { applySettings() }
         }
@@ -295,7 +295,7 @@ struct PrivacySettings: View {
             }
             Section("Permissions") {
                 permissionRow("Accessibility", "Auto-paste, HUD replacement, window snapping, keystroke HUD, islands", AX.trusted, "Privacy_Accessibility")
-                permissionRow("Screen & System Audio Recording", "Audio spectrum, window watch", CGPreflightScreenCaptureAccess(), "Privacy_ScreenCapture")
+                permissionRow("Screen & System Audio Recording", "Audio spectrum", CGPreflightScreenCaptureAccess(), "Privacy_ScreenCapture")
                 permissionRow("Full Disk Access", "Notification Mirror, Focus detection", NotificationMirror.shared.dbPath != nil, "Privacy_AllFiles")
                 permissionRow("Automation", "Spotify / Music / browsers / Messages", true, "Privacy_Automation")
             }
@@ -323,9 +323,6 @@ struct PrivacySettings: View {
 struct DeveloperSettings: View {
     @AppStorage(Prefs.Key.developerAPI) var api = false
     @AppStorage(Prefs.Key.notchApprovals) var approvals = true
-    @AppStorage(Prefs.Key.claudeTokenBudget) var claudeBudget = 0
-    @AppStorage(Prefs.Key.codexTokenBudget) var codexBudget = 0
-    @AppStorage(Prefs.Key.aiSections) var sections = "claude,codex"
     @AppStorage(Prefs.Key.anthropicModel) var model = "claude-sonnet-4-5"
     @Local private var apiKey = Keychain.get("anthropicKey") ?? ""
     @Local private var status = ""
@@ -351,11 +348,6 @@ struct DeveloperSettings: View {
                     }
                 }
                 if !status.isEmpty { Text(status).font(.caption).foregroundColor(.secondary).textSelection(.enabled) }
-            }
-            Section("AI usage") {
-                TextField("Sections shown (claude,codex)", text: $sections)
-                Stepper("Claude 5h token budget alert: \(claudeBudget == 0 ? "off" : AITab.short(claudeBudget))", value: $claudeBudget, in: 0...200_000_000, step: 1_000_000)
-                Stepper("Codex daily token budget alert: \(codexBudget == 0 ? "off" : AITab.short(codexBudget))", value: $codexBudget, in: 0...200_000_000, step: 1_000_000)
             }
             Section("Ask about the screen") {
                 SecureField("Anthropic API key (stored in Keychain)", text: $apiKey).onSubmit { Keychain.set(apiKey, for: "anthropicKey") }

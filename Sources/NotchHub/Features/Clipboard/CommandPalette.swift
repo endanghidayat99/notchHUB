@@ -204,13 +204,12 @@ struct PaletteView: View {
             PaletteCommand(icon: "keyboard", title: "Keyboard cleaning lock", subtitle: "System") { CleaningLock.shared.lockKeyboard() },
             PaletteCommand(icon: "rectangle.fill", title: "Clean screen", subtitle: "System") { CleaningLock.shared.cleanScreen() },
         ]
-        let shortcuts = ShortcutsService.shared.names.map { n in PaletteCommand(icon: "bolt.fill", title: n, subtitle: "Run Shortcut") { ShortcutsService.shared.run(n) } }
         let snippets = ClipboardService.shared.snippets.map { s in PaletteCommand(icon: "text.quote", title: s.name, subtitle: "Paste snippet") { ClipboardService.shared.copyText(s.body, paste: true) } }
         let clips = ClipboardService.shared.search(q).prefix(q.isEmpty ? 0 : 8).map { c in
             PaletteCommand(icon: "doc.on.clipboard", title: String(c.text.prefix(80)), subtitle: "Clipboard") { ClipboardService.shared.copy(c, paste: true) }
         }
         let files = fileResults.map { f in PaletteCommand(icon: "doc", title: (f as NSString).lastPathComponent, subtitle: f) { NSWorkspace.shared.open(URL(fileURLWithPath: f)) } }
-        let all = builtin + shortcuts + snippets
+        let all = builtin + snippets
         out += q.isEmpty ? all : all.filter { $0.title.localizedCaseInsensitiveContains(q) }
         out += clips + files
         if !q.isEmpty {

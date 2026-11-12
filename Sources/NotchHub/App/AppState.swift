@@ -4,9 +4,7 @@ import SwiftUI
 
 enum NotchTab: String, CaseIterable, Identifiable {
     case home = "Home", prayer = "Prayer", media = "Media", shelf = "Shelf", clipboard = "Clipboard", timer = "Timer"
-    case notes = "Notes", calendar = "Calendar", stocks = "Stocks", launcher = "Launcher"
-    case shortcuts = "Shortcuts", terminal = "Terminal", ai = "AI", system = "System"
-    case tools = "Tools", notifications = "Notifications"
+    case ai = "AI", system = "System", notifications = "Notifications"
 
     var id: String { rawValue }
     var title: String { L(rawValue) }
@@ -18,15 +16,8 @@ enum NotchTab: String, CaseIterable, Identifiable {
         case .shelf: return "tray.full"
         case .clipboard: return "doc.on.clipboard"
         case .timer: return "timer"
-        case .notes: return "note.text"
-        case .calendar: return "calendar"
-        case .stocks: return "chart.line.uptrend.xyaxis"
-        case .launcher: return "square.grid.2x2"
-        case .shortcuts: return "bolt.square"
-        case .terminal: return "terminal"
         case .ai: return "sparkles"
         case .system: return "cpu"
-        case .tools: return "wrench.and.screwdriver"
         case .notifications: return "bell"
         }
     }

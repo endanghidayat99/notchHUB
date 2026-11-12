@@ -59,7 +59,6 @@ enum Prefs {
         static let detachClipboard = "detachClipboard"
         static let detachTimer = "detachTimer"
         static let detachAI = "detachAI"
-        static let detachCuely = "detachCuely"
         // Productivity
         static let pomodoroWork = "pomodoroWork"
         static let pomodoroBreak = "pomodoroBreak"
@@ -68,7 +67,6 @@ enum Prefs {
         static let breakReminderMinutes = "breakReminderMinutes"
         static let weatherLat = "weatherLat"
         static let weatherLon = "weatherLon"
-        static let stocksWatchlist = "stocksWatchlist"
         static let focusIsland = "focusIsland"
         // Clipboard / search
         static let clipboardLimit = "clipboardLimit"
@@ -83,9 +81,6 @@ enum Prefs {
         // AI / dev
         static let developerAPI = "developerAPI"
         static let notchApprovals = "notchApprovals"
-        static let claudeTokenBudget = "claudeTokenBudget"
-        static let codexTokenBudget = "codexTokenBudget"
-        static let aiSections = "aiSections"
         static let anthropicModel = "anthropicModel"
         // Communication
         static let messageIsland = "messageIsland"
@@ -114,12 +109,11 @@ enum Prefs {
             Key.extraBrightnessLevel: 1.5, Key.hyperEscape: true,
             Key.pomodoroWork: 25, Key.pomodoroBreak: 5, Key.pomodoroLongBreak: 15, Key.pomodoroChain: true,
             Key.breakReminderMinutes: 0,
-            Key.stocksWatchlist: "AAPL,MSFT,NVDA,BBCA.JK",
             Key.focusIsland: true,
             Key.clipboardLimit: 200, Key.autoPaste: false, Key.ocrClipboard: true,
             Key.translateTarget: "id", Key.customSearchURL: "",
             Key.downloadAlerts: true, Key.screenshotShelf: true, Key.shakeToShelf: true,
-            Key.notchApprovals: true, Key.claudeTokenBudget: 0, Key.codexTokenBudget: 0, Key.aiSections: "claude,codex",
+            Key.notchApprovals: true,
             Key.anthropicModel: "claude-sonnet-4-5",
             Key.messageIsland: false, Key.callIsland: true,
             Key.updateFeedURL: "",
@@ -143,8 +137,7 @@ enum L10n {
 
     private static let id: [String: String] = [
         "Home": "Beranda", "Prayer": "Sholat", "Media": "Media", "Shelf": "Rak", "Clipboard": "Papan Klip", "Timer": "Timer",
-        "Notes": "Catatan", "Calendar": "Kalender", "Stocks": "Saham", "Launcher": "Peluncur",
-        "Shortcuts": "Pintasan", "Terminal": "Terminal", "AI": "AI", "System": "Sistem", "Tools": "Alat",
+        "AI": "AI", "System": "Sistem", "Tools": "Alat",
         "Notifications": "Notifikasi", "Settings": "Pengaturan", "Nothing playing": "Tidak ada yang diputar",
         "Drop files here": "Letakkan file di sini", "Start": "Mulai", "Pause": "Jeda", "Reset": "Atur Ulang",
         "Focus": "Fokus", "Break": "Istirahat", "Stopwatch": "Stopwatch", "Keep Awake": "Tetap Terjaga",

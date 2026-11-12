@@ -1,6 +1,5 @@
 import AppKit
 import Network
-import SwiftTerm
 import SwiftUI
 
 // MARK: - Agent center: approvals, activity, shell & build islands
@@ -79,12 +78,11 @@ final class AgentCenter: ObservableObject {
         case "Stop", "agent-turn-complete":
             AppState.shared.clearActivity("6-agent")
             var cost: Double?
-            if let t = b["transcript_path"] as? String { cost = AIUsageService.lastTurnCost(transcript: t); lastTurnCost = cost }
+            if let t = b["transcript_path"] as? String { cost = AICost.lastTurnCost(transcript: t); lastTurnCost = cost }
             let msg = b["last-assistant-message"] as? String ?? ""
             AppState.shared.show(Island(kind: .agent, icon: "checkmark.seal.fill", title: "\(agent.capitalized) finished",
                                         subtitle: cost.map { String(format: "Turn cost ≈ $%.3f", $0) } ?? msg, tint: .purple, duration: 4))
             log(AgentEvent(icon: "checkmark.seal", title: "\(agent.capitalized) turn done", detail: cost.map { String(format: "$%.3f", $0) } ?? msg))
-            AIUsageService.shared.refresh()
         case "Notification":
             let m = b["message"] as? String ?? ""
             AppState.shared.show(Island(kind: .agent, icon: "bell.fill", title: "\(agent.capitalized)", subtitle: m, tint: .purple, duration: 5))
@@ -367,43 +365,4 @@ enum HookInstaller {
         }
         return "Failed to write \(url.path)"
     }
-}
-
-// MARK: - Notch Terminal (SwiftTerm; the shell keeps running when switching tabs)
-
-final class TerminalHost {
-    static let shared = TerminalHost()
-    lazy var view: LocalProcessTerminalView = {
-        let v = LocalProcessTerminalView(frame: NSRect(x: 0, y: 0, width: 600, height: 200))
-        v.nativeBackgroundColor = .black
-        v.nativeForegroundColor = .white
-        v.font = NSFont.monospacedSystemFont(ofSize: 11, weight: .regular)
-        let shell = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/zsh"
-        var env = Terminal.getEnvironmentVariables(termName: "xterm-256color")
-        env.append("HOME=\(NSHomeDirectory())")
-        v.startProcess(executable: shell, args: ["-l"], environment: env, execName: "-" + (shell as NSString).lastPathComponent)
-        return v
-    }()
-}
-
-struct TerminalTab: View {
-    var body: some View {
-        TerminalRepresentable()
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .onAppear { DispatchQueue.main.async { TerminalHost.shared.view.window?.makeFirstResponder(TerminalHost.shared.view) } }
-    }
-}
-
-struct TerminalRepresentable: NSViewRepresentable {
-    func makeNSView(context: Context) -> NSView {
-        let container = NSView()
-        let t = TerminalHost.shared.view
-        t.removeFromSuperview()
-        t.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(t)
-        NSLayoutConstraint.activate([t.leadingAnchor.constraint(equalTo: container.leadingAnchor), t.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-                                     t.topAnchor.constraint(equalTo: container.topAnchor), t.bottomAnchor.constraint(equalTo: container.bottomAnchor)])
-        return container
-    }
-    func updateNSView(_ nsView: NSView, context: Context) {}
 }

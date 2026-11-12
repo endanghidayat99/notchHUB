@@ -8,7 +8,7 @@ No code from Notchy was decompiled or copied. See **FEATURES.md** for the parity
 ## Build
 ```bash
 cd ~/Workspace/NotchHub
-swift build                    # debug build (fetches Lottie + SwiftTerm)
+swift build                    # debug build (fetches Lottie)
 ./scripts/build_app.sh          # → build/NotchHub.app (ad-hoc signed)
 ./scripts/build_app.sh --install  # also copy to /Applications
 open build/NotchHub.app

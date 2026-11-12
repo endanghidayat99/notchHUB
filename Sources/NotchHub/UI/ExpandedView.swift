@@ -8,9 +8,9 @@ struct ExpandedView: View {
         VStack(spacing: 0) {
             // Header row lives beside the physical notch.
             HStack(spacing: 0) {
-                tabStrip(Array(NotchTab.allCases.prefix(8)))
+                tabStrip(Array(NotchTab.allCases.prefix(5)))
                 Spacer(minLength: geo.isPill ? 12 : geo.notch.width + 8)
-                tabStrip(Array(NotchTab.allCases.dropFirst(8)))
+                tabStrip(Array(NotchTab.allCases.dropFirst(5)))
                 Button { SettingsWindow.show() } label: { Image(systemName: "gearshape") }
                     .buttonStyle(.plain).foregroundColor(.secondary).padding(.leading, 6)
             }
@@ -25,15 +25,8 @@ struct ExpandedView: View {
                 case .shelf: ShelfTab()
                 case .clipboard: ClipboardTab()
                 case .timer: TimerTab()
-                case .notes: NotesTab()
-                case .calendar: CalendarTab()
-                case .stocks: StocksTab()
-                case .launcher: LauncherTab()
-                case .shortcuts: ShortcutsTab()
-                case .terminal: TerminalTab()
                 case .ai: AITab()
                 case .system: SystemTab()
-                case .tools: ToolsTab()
                 case .notifications: NotificationsTab()
                 }
             }

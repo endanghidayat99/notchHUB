@@ -1,6 +1,5 @@
 import AppKit
 import Carbon
-import CryptoKit
 import ScreenCaptureKit
 import SwiftUI
 
@@ -197,67 +196,6 @@ struct ScreenAskView: View {
         }
         .padding(16)
         .padding(.top, 14)
-    }
-}
-
-// MARK: - Window Watch: notify when part of a window changes (only hashes kept, never images)
-
-struct WatchedWindow: Identifiable {
-    let id: CGWindowID
-    let title: String
-    var lastHash: String = ""
-}
-
-final class WindowWatch: ObservableObject {
-    static let shared = WindowWatch()
-    @Published var watched: [WatchedWindow] = []
-    @Published var region: CGRect? = nil      // optional sub-rect in window coordinates (0-1 normalised)
-    private var timer: Timer?
-
-    func availableWindows() -> [(CGWindowID, String)] {
-        guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] else { return [] }
-        return list.compactMap { i in
-            guard (i[kCGWindowLayer as String] as? Int) == 0, let id = i[kCGWindowNumber as String] as? CGWindowID else { return nil }
-            let owner = i[kCGWindowOwnerName as String] as? String ?? ""
-            let name = i[kCGWindowName as String] as? String ?? ""
-            return (id, name.isEmpty ? owner : "\(owner) — \(name)")
-        }
-    }
-
-    func watch(_ id: CGWindowID, title: String) {
-        guard !watched.contains(where: { $0.id == id }) else { return }
-        watched.append(WatchedWindow(id: id, title: title, lastHash: hash(id) ?? ""))
-        if timer == nil { timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in self?.poll() } }
-    }
-
-    func unwatch(_ id: CGWindowID) { watched.removeAll { $0.id == id } }
-
-    private func hash(_ id: CGWindowID) -> String? {
-        guard let cg = CGWindowListCreateImage(.null, .optionIncludingWindow, id, [.boundsIgnoreFraming, .nominalResolution]) else { return nil }
-        var img = cg
-        if let r = region {
-            let crop = CGRect(x: r.minX * CGFloat(cg.width), y: r.minY * CGFloat(cg.height), width: r.width * CGFloat(cg.width), height: r.height * CGFloat(cg.height))
-            img = cg.cropping(to: crop) ?? cg
-        }
-        // Downsample to 32x32 grayscale to ignore tiny noise; hash the bytes and discard the image.
-        let w = 32, h = 32
-        var buf = [UInt8](repeating: 0, count: w * h)
-        guard let ctx = CGContext(data: &buf, width: w, height: h, bitsPerComponent: 8, bytesPerRow: w, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: 0) else { return nil }
-        ctx.draw(img, in: CGRect(x: 0, y: 0, width: w, height: h))
-        let q = buf.map { $0 / 16 }
-        return SHA256.hash(data: Data(q)).map { String(format: "%02x", $0) }.joined()
-    }
-
-    private func poll() {
-        for i in watched.indices {
-            guard let h = hash(watched[i].id) else { continue }
-            if !watched[i].lastHash.isEmpty && h != watched[i].lastHash {
-                let t = watched[i].title
-                AppState.shared.show(Island(kind: .info, icon: "eye.fill", title: "Window changed", subtitle: t, tint: .cyan, duration: 5))
-                Notifier.post("Window changed", t)
-            }
-            watched[i].lastHash = h
-        }
     }
 }
 

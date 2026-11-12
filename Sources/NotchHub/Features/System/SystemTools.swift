@@ -130,7 +130,6 @@ final class MenuBarDetach: NSObject {
         sync("clipboard", Prefs.Key.detachClipboard, "doc.on.clipboard") { AnyView(ClipboardTab()) }
         sync("timer", Prefs.Key.detachTimer, "timer") { AnyView(TimerTab()) }
         sync("ai", Prefs.Key.detachAI, "sparkles") { AnyView(AITab()) }
-        sync("cuely", Prefs.Key.detachCuely, "text.aligncenter") { AnyView(TeleprompterControls()) }
     }
 
     private func sync(_ id: String, _ key: String, _ icon: String, view: () -> AnyView) {
@@ -418,82 +417,6 @@ final class WindowSnapper {
         // AX uses top-left origin coordinates.
         setAX(w, kAXPositionAttribute, CGPoint(x: r.minX, y: primaryHeight - r.maxY))
         setAXSize(w, r.size)
-    }
-}
-
-// MARK: - App launcher & Apple Shortcuts
-
-final class LauncherStore: ObservableObject {
-    static let shared = LauncherStore()
-    @Published var apps: [String] = Store.load([String].self, "launcher") ?? ["/System/Applications/Mail.app", "/System/Applications/Notes.app", "/Applications/Safari.app"] {
-        didSet { Store.save(apps, "launcher") }
-    }
-
-    func add() {
-        let p = NSOpenPanel()
-        p.allowedContentTypes = [.application]
-        p.directoryURL = URL(fileURLWithPath: "/Applications")
-        p.allowsMultipleSelection = true
-        NSApp.activate(ignoringOtherApps: true)
-        if p.runModal() == .OK { apps += p.urls.map(\.path).filter { !apps.contains($0) } }
-    }
-}
-
-final class ShortcutsService: ObservableObject {
-    static let shared = ShortcutsService()
-    @Published var names: [String] = []
-
-    func load() {
-        Shell.runAsync("/usr/bin/shortcuts", ["list"]) { _, out in
-            self.names = out.split(separator: "\n").map(String.init).filter { !$0.isEmpty }
-        }
-    }
-
-    func run(_ name: String) {
-        AppState.shared.show(Island(kind: .info, icon: "bolt.fill", title: "Running “\(name)”", tint: .purple, duration: 1.5))
-        Shell.runAsync("/usr/bin/shortcuts", ["run", name]) { status, out in
-            if status != 0 { AppState.shared.show(Island(kind: .info, icon: "exclamationmark.triangle", title: "Shortcut failed", subtitle: out, tint: .orange)) }
-        }
-    }
-}
-
-struct LauncherTab: View {
-    @ObservedObject var store = LauncherStore.shared
-    var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))], spacing: 12) {
-                ForEach(store.apps, id: \.self) { path in
-                    VStack(spacing: 4) {
-                        Image(nsImage: NSWorkspace.shared.icon(forFile: path)).resizable().frame(width: 44, height: 44)
-                        Text(((path as NSString).lastPathComponent as NSString).deletingPathExtension).font(.system(size: 10)).lineLimit(1)
-                    }
-                    .onTapGesture { NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: path), configuration: .init()); AppState.shared.close() }
-                    .contextMenu { Button("Remove") { store.apps.removeAll { $0 == path } } }
-                }
-                Button { store.add() } label: {
-                    VStack { Image(systemName: "plus.app").font(.system(size: 30)); Text(L("Add")).font(.system(size: 10)) }.frame(width: 60)
-                }.buttonStyle(.plain).foregroundColor(.secondary)
-            }
-        }
-    }
-}
-
-struct ShortcutsTab: View {
-    @ObservedObject var s = ShortcutsService.shared
-    @Local private var filter = ""
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                TextField("Filter shortcuts", text: $filter).textFieldStyle(.roundedBorder)
-                Button { s.load() } label: { Image(systemName: "arrow.clockwise") }
-            }
-            ScrollView {
-                FlowChips(items: s.names.filter { filter.isEmpty || $0.localizedCaseInsensitiveContains(filter) }) { n in
-                    ChipButton(title: n, icon: "bolt.fill") { s.run(n) }
-                }
-            }
-        }
-        .onAppear { if s.names.isEmpty { s.load() } }
     }
 }
 
