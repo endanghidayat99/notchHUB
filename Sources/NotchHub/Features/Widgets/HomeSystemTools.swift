@@ -7,6 +7,7 @@ import UniformTypeIdentifiers
 struct HomeTab: View {
     @ObservedObject var weather = WeatherService.shared
     @ObservedObject var battery = BatteryService.shared
+    @ObservedObject var football = FootballService.shared
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
@@ -29,6 +30,10 @@ struct HomeTab: View {
                 Card {
                     if let n = PrayerService.shared.next {
                         Label("\(n.0.name) \(KeepAwake.fmt(n.1))", systemImage: n.0.icon).font(.caption).foregroundColor(.teal)
+                    }
+                    if Prefs.bool(FootballService.Key.enabled), let m = football.next {
+                        Label("vs \(m.opponent(football.team)) · \(FootballService.countdownText(m))", systemImage: "soccerball")
+                            .font(.caption).foregroundColor(.blue).lineLimit(1)
                     }
                     if battery.hasBattery { Label("\(battery.level)%\(battery.charging ? " ⚡︎" : "")", systemImage: "battery.100").font(.caption) }
                 }

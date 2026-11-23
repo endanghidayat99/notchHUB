@@ -30,6 +30,7 @@ struct SettingsView: View {
             SystemSettings().tabItem { Label("System", systemImage: "cpu") }
             ProductivitySettings().tabItem { Label("Productivity", systemImage: "checklist") }
             PrayerSettings().tabItem { Label(L10n.lang == "id" ? "Sholat" : "Prayer", systemImage: "moon.stars") }
+            FootballSettings().tabItem { Label(L10n.lang == "id" ? "Sepak Bola" : "Football", systemImage: "soccerball") }
             Form { Section("Desktop widgets") { DesktopWidgetSettings() } }.formStyle(.grouped)
                 .tabItem { Label("Widgets", systemImage: "square.grid.3x2") }
             PrivacySettings().tabItem { Label("Privacy", systemImage: "hand.raised") }
@@ -300,7 +301,7 @@ struct PrivacySettings: View {
                 permissionRow("Automation", "Spotify / Music / browsers / Messages", true, "Privacy_Automation")
             }
             Section("Data") {
-                Text("No ads, no tracking, no analytics. Everything stays on this Mac, except: lyrics (LRCLIB), weather (Open-Meteo), stocks (Yahoo Finance), translation (Google), and screenshots you explicitly send with “Ask” (Anthropic API, your key).")
+                Text("No ads, no tracking, no analytics. Everything stays on this Mac, except: lyrics (LRCLIB), weather (Open-Meteo), stocks (Yahoo Finance), football fixtures (FotMob calendar), translation (Google), and screenshots you explicitly send with “Ask” (Anthropic API, your key).")
                     .font(.caption).foregroundColor(.secondary)
             }
             Section("Face Unlock") {

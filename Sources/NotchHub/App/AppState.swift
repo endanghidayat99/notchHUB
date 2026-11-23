@@ -3,7 +3,7 @@ import Combine
 import SwiftUI
 
 enum NotchTab: String, CaseIterable, Identifiable {
-    case home = "Home", prayer = "Prayer", media = "Media", shelf = "Shelf", clipboard = "Clipboard", timer = "Timer"
+    case home = "Home", prayer = "Prayer", football = "Football", media = "Media", shelf = "Shelf", clipboard = "Clipboard", timer = "Timer"
     case ai = "AI", system = "System", notifications = "Notifications"
 
     var id: String { rawValue }
@@ -12,6 +12,7 @@ enum NotchTab: String, CaseIterable, Identifiable {
         switch self {
         case .home: return "house"
         case .prayer: return "moon.stars"
+        case .football: return "soccerball"
         case .media: return "music.note"
         case .shelf: return "tray.full"
         case .clipboard: return "doc.on.clipboard"

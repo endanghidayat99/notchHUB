@@ -93,6 +93,7 @@ enum Prefs {
 
     static func registerDefaults() {
         PrayerService.registerDefaults()
+        FootballService.registerDefaults()
         UserDefaults.standard.register(defaults: [
             Key.pillWidth: 190.0, Key.pillHeight: 30.0, Key.pillYOffset: 4.0,
             Key.targetDisplay: 0, Key.hideInFullscreen: true,
@@ -136,7 +137,7 @@ enum L10n {
     }
 
     private static let id: [String: String] = [
-        "Home": "Beranda", "Prayer": "Sholat", "Media": "Media", "Shelf": "Rak", "Clipboard": "Papan Klip", "Timer": "Timer",
+        "Home": "Beranda", "Prayer": "Sholat", "Football": "Sepak Bola", "Media": "Media", "Shelf": "Rak", "Clipboard": "Papan Klip", "Timer": "Timer",
         "AI": "AI", "System": "Sistem", "Tools": "Alat",
         "Notifications": "Notifikasi", "Settings": "Pengaturan", "Nothing playing": "Tidak ada yang diputar",
         "Drop files here": "Letakkan file di sini", "Start": "Mulai", "Pause": "Jeda", "Reset": "Atur Ulang",

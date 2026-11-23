@@ -26,6 +26,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         SystemStats.shared.start()
         FocusWatcher.shared.start()
         PrayerService.shared.start()
+        FootballService.shared.start()
         DesktopWidgets.shared.sync()
         CommandPalette.shared.registerHotKey()
         applySettings()

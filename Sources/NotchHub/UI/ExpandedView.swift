@@ -21,6 +21,7 @@ struct ExpandedView: View {
                 switch state.tab {
                 case .home: HomeTab()
                 case .prayer: PrayerTab()
+                case .football: FootballTab()
                 case .media: MediaTab()
                 case .shelf: ShelfTab()
                 case .clipboard: ClipboardTab()

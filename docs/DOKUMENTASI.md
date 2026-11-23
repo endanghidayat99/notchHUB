@@ -7,6 +7,7 @@ Per 12 November 2026. Versi online: https://claude.ai/artifact/X7McbfkvHX2W8vVT8
 1. [Ringkasan & instalasi](#ringkasan--instalasi)
 2. [Antarmuka notch](#antarmuka-notch)
 3. [Waktu sholat](#waktu-sholat)
+   - [Jadwal Persib](#jadwal-persib)
 4. [Musik & media](#musik--media)
 5. [Produktivitas](#produktivitas)
 6. [Clipboard, pencarian & command palette](#clipboard-pencarian--command-palette)
@@ -68,7 +69,7 @@ Notch punya empat keadaan: **tertutup** (menyatu dengan notch fisik, menampilkan
 - **Bahasa**: mengikuti macOS, atau pilih English / Bahasa Indonesia
 - **Launch at login**
 
-**Tab** (ikon di kiri dan kanan notch): Beranda, Sholat, Media, Rak (Shelf), Papan Klip, Timer, AI, Sistem, Notifikasi.
+**Tab** (ikon di kiri dan kanan notch): Beranda, Sholat, Sepak Bola, Media, Rak (Shelf), Papan Klip, Timer, AI, Sistem, Notifikasi.
 
 **Hotkey**
 
@@ -110,6 +111,21 @@ Pengingat island + notifikasi juga muncul N menit sebelum waktu (default 10 meni
 | Koreksi | ±30 menit per waktu (menyamakan dengan jadwal masjid setempat) |
 
 File suara adzan tidak disertakan di aplikasi. Sebelum memilih file, saat masuk waktu hanya terdengar bunyi notifikasi singkat. Contoh hasil untuk Palu, 11 November 2026: Subuh 04:21, Dzuhur 11:46, Ashar 15:09, Maghrib 17:51, Isya 19:03 WITA.
+
+### Jadwal Persib
+
+**Tab Sepak Bola** (ikon bola) menampilkan laga berikutnya Persib Bandung (lawan, kandang/tandang, kompetisi, stadion, jam kick-off) dengan countdown "N hari lagi" / "Besok" / "Hari ini" plus timer jam:menit saat H-1, dan daftar 5 laga terakhir dengan skor serta label M/S/K. Klik baris laga untuk membuka detailnya di FotMob. Laga berikutnya juga tampil di tab Beranda.
+
+Data diambil dari kalender publik FotMob (`pub.fotmob.com/.../calendar/team/165196.ics`): semua kompetisi (Super League, ACL Two, ASEAN Club Championship, dll.) dalam satu permintaan, tanpa API key. Diperbarui tiap 30 menit (tiap 5 menit di sekitar jam pertandingan); data terakhir disimpan sehingga tetap tampil saat offline. FotMob hanya memperbarui kalender beberapa jam sekali, jadi skor muncul setelah laga selesai, bukan live.
+
+**Pengaturan** (Settings › Sepak Bola)
+
+| Opsi | Pilihan / default |
+| --- | --- |
+| Tampilkan jadwal tim | on |
+| Countdown di notch | Selalu (H-n) / Hanya di hari pertandingan (default) / Tidak |
+| Pengingat kick-off | 0–180 menit, default 60 (island di notch) |
+| FotMob team ID | 165196 (Persib Bandung); ganti untuk klub lain |
 
 ## Musik & media
 
@@ -280,7 +296,7 @@ curl -X POST -H "Authorization: Bearer $TOKEN" -d '{"title":"Deploy selesai"}' h
 
 **Fitur yang sengaja dihapus (12 November 2026):** Catatan cepat & Apple Reminders, Kalender, Saham, App launcher, Apple Shortcuts, Terminal di notch, pelacak pemakaian AI (token, biaya, batas Claude Code & Codex), dan tab Alat (panel Search, teleprompter Cuely, Camera Mirror, Window Watch). Search, terjemahan, dan kalkulator tetap ada di command palette; pengaturan widget desktop pindah ke Settings › Widgets.
 
-**Privasi.** Tidak ada iklan, tracking, atau analytics. Data tetap di Mac, kecuali permintaan ke layanan berikut: lirik (LRCLIB), cuaca (Open-Meteo), saham (Yahoo Finance), terjemahan (Google), dan screenshot yang Anda kirim sendiri lewat tombol Ask (Anthropic API, memakai key Anda). Waktu sholat dihitung offline.
+**Privasi.** Tidak ada iklan, tracking, atau analytics. Data tetap di Mac, kecuali permintaan ke layanan berikut: lirik (LRCLIB), cuaca (Open-Meteo), saham (Yahoo Finance), jadwal sepak bola (kalender FotMob), terjemahan (Google), dan screenshot yang Anda kirim sendiri lewat tombol Ask (Anthropic API, memakai key Anda). Waktu sholat dihitung offline.
 
 **Fitur Notchy yang tidak tersedia atau berbeda**
 

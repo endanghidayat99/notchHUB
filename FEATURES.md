@@ -115,3 +115,4 @@ Legend: ✅ implemented · 🟡 partial / different approach · ❌ not possible
 | Countdown in notch (always / last 30 min / off) | ✅ | |
 | Adzan on/off (global + per prayer, custom MP3, separate Subuh file, volume, mute in Focus) | ✅ | no adzan audio bundled — choose your own file |
 | Notification at prayer time + reminder N minutes before | ✅ | scheduled system notifications |
+| Football fixtures (default Persib Bandung): next match countdown (H-n) + last 5 results | ✅ | FotMob public team calendar (.ics), all competitions, kick-off reminder island |
